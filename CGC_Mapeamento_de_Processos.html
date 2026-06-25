@@ -44,7 +44,7 @@ a{color:var(--orange);text-decoration:none;}
 .nav-group h3{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:#7388ad;padding:14px 22px 6px;margin:0;}
 .nav-group a{display:block;padding:7px 22px;font-size:13.3px;color:#cfd9ec;border-left:3px solid transparent;}
 .nav-group a:hover{background:rgba(255,255,255,.06);color:#fff;border-left-color:var(--orange);}
-.main{flex:1;min-width:0;padding:34px 40px 80px;max-width:1180px;}
+.main{flex:1;min-width:0;padding:34px 40px 80px;max-width:none;width:100%;}
 
 header.exec{
   background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
@@ -78,7 +78,7 @@ section.block p.desc{font-size:13.6px;color:var(--muted);margin:6px 0 16px;max-w
   padding:22px 24px;box-shadow:0 1px 3px rgba(20,30,60,.04);
 }
 .diagram{overflow-x:auto;padding-top:6px;}
-.diagram .mermaid{min-width:560px;}
+.diagram .mermaid{display:flex;justify-content:safe center;}
 
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:14px 0 0;padding-top:14px;border-top:1px dashed var(--border);}
 .legend span{display:inline-flex;align-items:center;gap:6px;}
@@ -226,7 +226,7 @@ A["Demanda e Contratação<br/>Análise de RC · Validação técnica · Assinat
       <p class="desc">Visão consolidada das interfaces entre as áreas envolvidas na gestão contratual, da abertura da demanda até o pagamento da contratada.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -277,7 +277,7 @@ C6 -.-> D3
       <p class="desc">Análise prévia da Requisição de Compra pela Célula antes do encaminhamento à Suprimentos, assegurando conformidade técnica, contratual e processual da demanda, com SLA de até 5 dias úteis e avaliação de consolidação de contratos.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -322,7 +322,7 @@ C5 --> S1
       <p class="desc">Cadastro de contratos novos, Termos de Aditivo (TAC) e Termos de Encerramento (TEC) na Planilha de Gestão de Contratos / SIGEC, com checklist de conformidade e classificação do contrato por valor global (Classe I a IV).</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -369,7 +369,7 @@ C5 -->|"Sim"| C6 --> C7
       <p class="desc">Da elaboração do memorial descritivo à integração do colaborador da contratada no site, incluindo Kick-off (obrigatório para contratos Classe I e II), preenchimento do QEM (Quadro de Evidências Mínimas) e cadastro no sistema MOBI.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -425,7 +425,7 @@ CC5 -->|"Aprovado"| CC6 --> FF3 --> CC7 --> FF4
       <p class="desc">Validação qualitativa da documentação mensal (trabalhista, tributária e de segurança) — o COA é analisado pela Equipe Info em até 72h úteis, com loop de pendências até a regularização antes da liberação do BM.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
@@ -465,7 +465,7 @@ V1 -->|"Sim"| A3
       <p class="desc">Fluxo operacional da medição no SIGEC WEB: a Contratada elabora o BM1 (Prestação de Serviços, com evidências) e o BM2 (Documentação Mensal, com comprovação de impostos conforme COA). A Célula avalia, recusa em caso de não conformidade e encaminha para aprovação do Fiscal e do Gestor.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
@@ -550,7 +550,7 @@ AM --> LIB["BM liberado para emissão de NF e pagamento"]:::celula
       <p class="desc">Liberação sistêmica para emissão da NF após aprovação do BM1, com abertura da Ordem de Compra conforme o boletim de medição e verificação de conformidade antes do protocolo junto ao setor Fiscal.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -584,7 +584,7 @@ F2 -->|"Sim"| C3 --> C4
       <p class="desc">Classificação de impostos pelo setor Fiscal, criação das Ordens de Compra no sistema Financeiro (IFS) e envio do processo completo ao Financeiro com no mínimo 10 dias corridos de antecedência ao pagamento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -675,7 +675,7 @@ E -->|"Sem retorno da área"| H["Atualiza planilha como contrato encerrado"]:::c
       <p class="desc">Formalização de Termos de Aditivo Contratual (TAC), com reclassificação do contrato quando o aditivo altera o valor global.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef purple fill:#6a4c93,color:#fff,stroke:#4d3569;
@@ -743,7 +743,7 @@ G --> H["Aplica novo valor nas próximas medições"]:::celula
       <p class="desc">Desmobilização da contratada, verificação de pendências administrativas, emissão de NADA CONSTA e formalização do Termo de Encerramento Contratual (TEC) com o Jurídico.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
