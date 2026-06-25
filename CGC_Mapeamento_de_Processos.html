@@ -189,7 +189,7 @@ footer.foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--border);
 
     <!-- 1. CABEÇALHO EXECUTIVO -->
     <header class="exec" id="visao">
-      <span class="tag">PROCEDIMENTO OPERACIONAL PADRÃO · PROCESSOS</span>
+      <span class="tag">DESENHO DO POP · GESTÃO DE PROCESSOS DA CGC</span>
       <h1>Célula de Gestão de Contratos (CGC/CGCP)</h1>
       <h2>GAFI — Aura Minerals, Unidade Apoena. Interface entre Contratada, áreas demandantes, Suprimentos, Fiscal, Jurídico e Financeiro ao longo de todo o ciclo de vida contratual.</h2>
       <div class="objetivo">
@@ -226,7 +226,7 @@ A["Demanda e Contratação<br/>Análise de RC · Validação técnica · Assinat
       <p class="desc">Visão consolidada das interfaces entre as áreas envolvidas na gestão contratual, da abertura da demanda até o pagamento da contratada.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -277,7 +277,7 @@ C6 -.-> D3
       <p class="desc">Análise prévia da Requisição de Compra pela Célula antes do encaminhamento à Suprimentos, assegurando conformidade técnica, contratual e processual da demanda, com SLA de até 5 dias úteis e avaliação de consolidação de contratos.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -322,7 +322,7 @@ C5 --> S1
       <p class="desc">Cadastro de contratos novos, Termos de Aditivo (TAC) e Termos de Encerramento (TEC) na Planilha de Gestão de Contratos / SIGEC, com checklist de conformidade e classificação do contrato por valor global (Classe I a IV).</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -369,7 +369,7 @@ C5 -->|"Sim"| C6 --> C7
       <p class="desc">Da elaboração do memorial descritivo à integração do colaborador da contratada no site, incluindo Kick-off (obrigatório para contratos Classe I e II), preenchimento do QEM (Quadro de Evidências Mínimas) e cadastro no sistema MOBI.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -422,10 +422,10 @@ CC5 -->|"Aprovado"| CC6 --> FF3 --> CC7 --> FF4
 
     <section class="block" id="documental">
       <div class="block-head"><span class="num">06</span><h2>Gestão Documental</h2></div>
-      <p class="desc">Validação qualitativa da documentação mensal (trabalhista, tributária e de segurança) — o COA é analisado pela Equipe Info em até 72h úteis, com loop de pendências até a regularização antes da liberação do BM.</p>
+      <p class="desc">Validação qualitativa da documentação mensal (trabalhista, tributária e de segurança) — o COA (Conjunto de Obrigações Acessórias) é analisado pelo Analista de COA em até 72h úteis, com loop de pendências até a regularização antes da liberação do BM.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
@@ -444,7 +444,7 @@ A2["Recebe pendências e regulariza o processo"]:::celula
 A3["Recebe documentação aprovada (COA)"]:::celula
 end
 
-subgraph VL["Equipe Info · RH · SSMA"]
+subgraph VL["Analista de COA · RH · SSMA"]
 V1{"Documentos do COA em conformidade?<br/>(análise em até 72h úteis)"}:::decisao
 end
 
@@ -454,7 +454,7 @@ V1 -->|"Sim"| A3
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
-          <span><i style="background:#2f7a78"></i>Equipe Info / RH / SSMA</span>
+          <span><i style="background:#2f7a78"></i>Analista de COA / RH / SSMA</span>
           <span><i style="background:#f1602c"></i>Contratada</span>
         </div>
       </div>
@@ -465,7 +465,7 @@ V1 -->|"Sim"| A3
       <p class="desc">Fluxo operacional da medição no SIGEC WEB: a Contratada elabora o BM1 (Prestação de Serviços, com evidências) e o BM2 (Documentação Mensal, com comprovação de impostos conforme COA). A Célula avalia, recusa em caso de não conformidade e encaminha para aprovação do Fiscal e do Gestor.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
@@ -523,13 +523,13 @@ classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
 subgraph SEQ["Sequência obrigatória de validação"]
 direction LR
-P1["Preposto: elabora BM e anexa<br/>documentos comprobatórios"]:::fornecedor --> F1["Fiscal: conferência técnica<br/>e validação quanti/qualitativa"]:::gestor --> G1["Gestor: análise gerencial,<br/>orçamentária e de escopo"]:::gestor --> A1["Administrador: validação<br/>administrativa e documental final"]:::celula
+P1["Preposto: elabora BM e anexa<br/>documentos comprobatórios"]:::fornecedor --> F1["Fiscal: conferência técnica<br/>e validação quanti/qualitativa"]:::gestor --> G1["Gestor: análise gerencial,<br/>orçamentária e de escopo"]:::gestor --> A1["Analista CGC: validação administrativa<br/>e documental final · libera NF"]:::celula
 end
 
 A1 --> D1{"Valor total do BM"}:::decisao
-D1 -->|"&lt; R$ 100 mil"| AL1["Aprovação do Coordenador"]:::celula
-D1 -->|"R$ 100 mil a R$ 1 milhão"| AL2["Aprovação do Gerente"]:::celula
-D1 -->|"&gt; R$ 1 milhão"| AL3["Aprovação do Diretor"]:::celula
+D1 -->|"Acima de R$ 10 mil"| AL1["Aprovação do Coordenador"]:::celula
+D1 -->|"R$ 20 mil a R$ 500 mil"| AL2["Aprovação do Gerente"]:::celula
+D1 -->|"Acima de R$ 500 mil"| AL3["Aprovação do Diretor"]:::celula
 AL1 --> AM["Amostragem mínima de 10% das evidências<br/>(ampliável conforme complexidade)"]:::celula
 AL2 --> AM
 AL3 --> AM
@@ -538,10 +538,10 @@ AM --> LIB["BM liberado para emissão de NF e pagamento"]:::celula
         <div class="legend">
           <span><i style="background:#f1602c"></i>Preposto / Contratada</span>
           <span><i style="background:#2f7a78"></i>Fiscal / Gestor</span>
-          <span><i style="background:#13233f"></i>Célula (Administrador do Contrato)</span>
+          <span><i style="background:#13233f"></i>Célula (Analista do Contrato)</span>
           <span><i style="background:#ffe2b0"></i>Ponto de decisão (alçada)</span>
         </div>
-        <div class="note"><strong>Fluxo eletrônico de assinatura (SIGEC):</strong> a aprovação eletrônica observa, obrigatoriamente, a sequência <strong>Preposto → Administrador → Fiscal → Gestor</strong>, vedada a conclusão sem a anuência expressa de todos. As demais pessoas que assinam o BM, por não acompanharem a rotina do contrato, não respondem por não conformidades, mas qualquer desvio identificado deve ser reportado e paralisa a medição até esclarecimento.</div>
+        <div class="note"><strong>Fluxo eletrônico de assinatura (SIGEC):</strong> a aprovação eletrônica observa, obrigatoriamente, a sequência <strong>Preposto → Fiscal → Gestor → Analista (CGC)</strong>, vedada a conclusão sem a anuência expressa de todos. As demais pessoas que assinam o BM, por não acompanharem a rotina do contrato, não respondem por não conformidades, mas qualquer desvio identificado deve ser reportado e paralisa a medição até esclarecimento.</div>
       </div>
     </section>
 
@@ -550,7 +550,7 @@ AM --> LIB["BM liberado para emissão de NF e pagamento"]:::celula
       <p class="desc">Liberação sistêmica para emissão da NF após aprovação do BM1, com abertura da Ordem de Compra conforme o boletim de medição e verificação de conformidade antes do protocolo junto ao setor Fiscal.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
@@ -584,7 +584,7 @@ F2 -->|"Sim"| C3 --> C4
       <p class="desc">Classificação de impostos pelo setor Fiscal, criação das Ordens de Compra no sistema Financeiro (IFS) e envio do processo completo ao Financeiro com no mínimo 10 dias corridos de antecedência ao pagamento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -675,7 +675,7 @@ E -->|"Sem retorno da área"| H["Atualiza planilha como contrato encerrado"]:::c
       <p class="desc">Formalização de Termos de Aditivo Contratual (TAC), com reclassificação do contrato quando o aditivo altera o valor global.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef purple fill:#6a4c93,color:#fff,stroke:#4d3569;
@@ -743,7 +743,7 @@ G --> H["Aplica novo valor nas próximas medições"]:::celula
       <p class="desc">Desmobilização da contratada, verificação de pendências administrativas, emissão de NADA CONSTA e formalização do Termo de Encerramento Contratual (TEC) com o Jurídico.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
-flowchart LR
+flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
 classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
@@ -792,7 +792,7 @@ G1 --> C1 --> C2 --> C3 --> F1 --> F2 --> C4 --> G2 --> F3 --> C5 --> C6 --> J1 
 
     <section class="block" id="penalidades">
       <div class="block-head"><span class="num">16</span><h2>Notificação Contratual e Penalidades</h2></div>
-      <p class="desc">Tratamento de desvios contratuais sob a ótica da Cultura Justa, com acionamento do Comitê de Contratadas em situações de risco relevante e exigência de aprovação da Diretoria para multas superiores a R$ 50 mil.</p>
+      <p class="desc">Tratamento de desvios contratuais e não conformidades. A CGC apoia o Gestor no levantamento das informações previstas em contrato e, conforme solicitação, na emissão de Notificação Contratual com apoio do Jurídico, observando a escala formal de consequências: Conversa → Notificação → Multa → Distrato.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
@@ -801,19 +801,18 @@ classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
 classDef purple fill:#6a4c93,color:#fff,stroke:#4d3569;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
-A["Fiscal / Gestor identifica desvio contratual"]:::gestor --> B["CGC avalia o desvio (Cultura Justa / Medidas Disciplinares)"]:::celula
-B --> C{"Risco contratual, legal, reputacional, financeiro ou de compliance?"}:::decisao
-C -->|"Sim"| D["Aciona Comitê de Contratadas<br/>(CGC · Suprimentos · RH · Seg. Empresarial · Jurídico · Controladoria · Controles Internos · Área Técnica)"]:::celula
-C -->|"Não"| E["CGC solicita Notificação Contratual ao Jurídico"]:::celula
-D --> E
-E --> F["Notifica a Contratada com prazo para sanar"]:::purple
-F --> G{"Desvio sanado no prazo?"}:::decisao
-G -->|"Sim"| H["Encerra a ocorrência e registra evidências"]:::celula
-G -->|"Não"| I["Aplica multa conforme cláusula contratual"]:::celula
-I --> J{"Multa &gt; R$ 50 mil?"}:::decisao
-J -->|"Sim"| K["Exige aprovação formal da Diretoria"]:::celula
+A["Fiscal / Gestor identifica desvio ou não atendimento da demanda"]:::gestor --> B["CGC apoia o Gestor no levantamento das informações previstas em contrato"]:::celula
+B --> C["1 · Conversa / alinhamento formal com a Contratada"]:::celula
+C --> D{"Desvio sanado?"}:::decisao
+D -->|"Sim"| E["Encerra a ocorrência e registra evidências"]:::celula
+D -->|"Não"| F["2 · CGC solicita Notificação Contratual ao Jurídico"]:::purple
+F --> G["Notifica a Contratada com prazo para sanar"]:::purple
+G --> H{"Desvio sanado no prazo?"}:::decisao
+H -->|"Sim"| E
+H -->|"Não"| I["3 · Aplica multa conforme cláusula contratual"]:::celula
+I --> J{"Descumprimento mantido / reincidência?"}:::decisao
 J -->|"Não"| L["Formaliza e registra a penalidade"]:::celula
-K --> L
+J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
@@ -827,19 +826,14 @@ K --> L
     <!-- 5. GOVERNANÇA E CONTROLES -->
     <section class="block" id="classificacao">
       <div class="block-head"><span class="num">17</span><h2>Classificação de Contratos</h2></div>
-      <p class="desc">Classificação por valor global e por prazo, que define os níveis de governança, controle e acompanhamento aplicáveis a cada contrato.</p>
+      <p class="desc">Classificação dos contratos por criticidade, risco e complexidade, que define os níveis de governança e os requisitos de Kick-off e QEM aplicáveis.</p>
       <div class="grid-4" style="margin-bottom:16px;">
-        <div class="mini-card cls"><span class="badge cls1">Classe I</span><h4>Estratégicos</h4><p>Valor global superior a R$ 10 milhões. Kick-off e QEM obrigatórios.</p></div>
-        <div class="mini-card cls"><span class="badge cls2">Classe II</span><h4>Relevantes</h4><p>Valor global superior a R$ 5 milhões. Kick-off e QEM obrigatórios.</p></div>
-        <div class="mini-card cls"><span class="badge cls3">Classe III</span><h4>Significativos</h4><p>Valor global entre R$ 2,5 milhões e R$ 5 milhões. QEM obrigatório.</p></div>
-        <div class="mini-card cls"><span class="badge cls4">Classe IV</span><h4>Operacionais</h4><p>Valor global igual ou inferior a R$ 2,5 milhões.</p></div>
+        <div class="mini-card cls"><span class="badge cls1">Classe I</span><h4>Estratégicos</h4><p>Maior nível de governança e acompanhamento. Kick-off e QEM obrigatórios.</p></div>
+        <div class="mini-card cls"><span class="badge cls2">Classe II</span><h4>Relevantes</h4><p>Kick-off e QEM obrigatórios.</p></div>
+        <div class="mini-card cls"><span class="badge cls3">Classe III</span><h4>Significativos</h4><p>QEM obrigatório.</p></div>
+        <div class="mini-card cls"><span class="badge cls4">Classe IV</span><h4>Operacionais</h4><p>Acompanhamento conforme a criticidade do contrato.</p></div>
       </div>
-      <div class="grid-3">
-        <div class="mini-card op"><h4>Contrato Temporário</h4><p>Vigência igual ou inferior a 12 meses, incluídas prorrogações dentro desse limite.</p></div>
-        <div class="mini-card op"><h4>Contrato Fixo</h4><p>Vigência superior a 12 meses, independentemente do valor global ou da natureza do escopo.</p></div>
-        <div class="mini-card op"><h4>Gestão Simplificada</h4><p>Contrato temporário até R$ 1 milhão, de baixa complexidade e baixo impacto em compliance — gestão pode ser conduzida pela Área Demandante, mediante avaliação formal da CGC.</p></div>
-      </div>
-      <div class="note"><strong>Reclassificação:</strong> a classe é definida na formalização e reavaliada a cada aditivo que altere o valor global, aplicando-se automaticamente os requisitos de governança, controle e acompanhamento da nova classe.</div>
+      <div class="note"><strong>Kick-off:</strong> obrigatório conforme criticidade, risco ou complexidade, com formalização no formulário de Reunião de Kick-off. <strong>QEM</strong> obrigatório para contratos Classe I, II e III — a ausência de documentação mínima impede o início da análise e aprovação do BM.</div>
     </section>
 
     <!-- 6. MATRIZ RACI -->
@@ -879,12 +873,12 @@ K --> L
       <div class="block-head"><span class="num">19</span><h2>Pontos de Controle (SOX)</h2></div>
       <p class="desc">Controles-chave do processo de gestão contratual, com o objetivo de controle e o risco mitigado em cada um — base para os testes de desenho e efetividade em auditoria.</p>
       <div class="grid-2">
-        <div class="mini-card ctrl"><span class="badge sox">Segregação de funções</span><h4>Sequência obrigatória e não invertível de aprovação do BM</h4><p>Preposto → (Administrador) → Fiscal → Gestor, sem inversão ou supressão de fases. Mitiga aprovação indevida e pagamento sem validação técnica e gerencial.</p></div>
-        <div class="mini-card ctrl"><span class="badge sox">Alçada</span><h4>Aprovação complementar por valor do BM</h4><p>Coordenador (&lt; R$ 100 mil), Gerente (R$ 100 mil–1 milhão) e Diretor (&gt; R$ 1 milhão). A ausência da alçada impede pagamento e contabilização.</p></div>
+        <div class="mini-card ctrl"><span class="badge sox">Segregação de funções</span><h4>Sequência obrigatória e não invertível de aprovação do BM</h4><p>Preposto → Fiscal → Gestor → Analista (CGC), sem inversão ou supressão de fases. Mitiga aprovação indevida e pagamento sem validação técnica e gerencial.</p></div>
+        <div class="mini-card ctrl"><span class="badge sox">Alçada</span><h4>Aprovação complementar por valor do BM</h4><p>Coordenador (acima de R$ 10 mil), Gerente (R$ 20 mil a R$ 500 mil) e Diretor (acima de R$ 500 mil). A ausência da alçada impede pagamento e contabilização.</p></div>
         <div class="mini-card ctrl"><span class="badge sox">Evidência</span><h4>Amostragem mínima de 10% das evidências</h4><p>Ampliável conforme a complexidade do contrato. Mitiga pagamento de serviço não efetivamente prestado.</p></div>
         <div class="mini-card ctrl"><span class="badge sox">Rastreabilidade</span><h4>Medição exclusivamente no SIGEC WEB</h4><p>Evita medições por e-mail sem integração ao saldo. Garante trilha de auditoria e abatimento correto do saldo contratual.</p></div>
-        <div class="mini-card ctrl"><span class="badge sox">Conformidade documental</span><h4>Validação do COA pela Equipe Info (72h úteis)</h4><p>Documentação trabalhista e tributária validada antes da liberação do BM. A ausência de documento do QEM impede a análise do BM.</p></div>
-        <div class="mini-card ctrl"><span class="badge sox">Governança</span><h4>Multa &gt; R$ 50 mil aprovada pela Diretoria</h4><p>Penalidades acima do limite exigem aprovação formal da Diretoria, registrada como evidência do processo decisório.</p></div>
+        <div class="mini-card ctrl"><span class="badge sox">Conformidade documental</span><h4>Validação do COA pelo Analista de COA (72h úteis)</h4><p>Documentação trabalhista e tributária validada antes da liberação do BM. A ausência de documento do QEM impede a análise do BM.</p></div>
+        <div class="mini-card ctrl"><span class="badge sox">Governança</span><h4>Escala formal de tratamento de não conformidades</h4><p>Progressão Conversa → Notificação → Multa → Distrato, com Notificação Contratual emitida pela CGC via Jurídico e penalidades conforme cláusula contratual.</p></div>
         <div class="mini-card ctrl"><span class="badge sox">Prevenção</span><h4>Análise prévia de RC pela CGC (5 dias úteis)</h4><p>Define critérios de medição e evidências antes da contratação e avalia consolidação de contratos.</p></div>
         <div class="mini-card ctrl"><span class="badge sox">Integridade do cadastro</span><h4>Reclassificação por aditivo de valor</h4><p>Aditivos que alteram o valor global reclassificam o contrato e atualizam automaticamente os requisitos de governança.</p></div>
       </div>
@@ -913,7 +907,7 @@ K --> L
       <div class="grid-3">
         <div class="mini-card kpi"><h4>SLA de Análise de RC</h4><p>Até 5 dias úteis a partir do recebimento da requisição completa.</p></div>
         <div class="mini-card kpi"><h4>SLA de Análise MOBI</h4><p>48h para análise regular; 24h para análise emergencial (até 10% do volume de documentos).</p></div>
-        <div class="mini-card kpi"><h4>SLA de Análise do COA</h4><p>Até 72h úteis para validação da documentação mensal pela Equipe Info.</p></div>
+        <div class="mini-card kpi"><h4>SLA de Análise do COA</h4><p>Até 72h úteis para validação da documentação mensal pelo Analista de COA.</p></div>
         <div class="mini-card kpi"><h4>% de OC Global emitida</h4><p>Percentual da base de contratos com Ordem de Compra Global emitida, por gerência (meta: 100%).</p></div>
         <div class="mini-card kpi"><h4>Valor medido x valor contratado</h4><p>Acompanhamento do consumo do valor total contratado frente ao valor efetivamente medido.</p></div>
         <div class="mini-card kpi"><h4>Contratos a vencer (30/60/90 dias)</h4><p>Volume de contratos no Farol de Contratos próximos do vencimento, por gerência/área.</p></div>
@@ -935,7 +929,7 @@ K --> L
         <div class="mini-card risk"><span class="badge media">Contratual</span><h4>Reajuste aplicado de forma não uniforme</h4><p>Itens do QQP reajustados de maneira divergente geram inconsistências de valor e dificultam a auditoria.</p></div>
         <div class="mini-card risk"><span class="badge alta">Compliance</span><h4>Conflito de interesse na aprovação</h4><p>Usuário cadastrado como fornecedor que também aprova como fiscal compromete a segregação de funções.</p></div>
         <div class="mini-card risk"><span class="badge media">Financeiro</span><h4>Fragilidade financeira da contratada</h4><p>Risco de continuidade da execução contratual em caso de instabilidade financeira do fornecedor.</p></div>
-        <div class="mini-card risk"><span class="badge media">Governança</span><h4>Penalidade aplicada sem alçada formal</h4><p>Multas acima de R$ 50 mil exigem aprovação prévia da Diretoria; ausência dessa formalização gera risco de invalidação da penalidade.</p></div>
+        <div class="mini-card risk"><span class="badge media">Governança</span><h4>Penalidade aplicada sem formalização</h4><p>Notificações e multas aplicadas fora da escala formal (Conversa → Notificação → Multa → Distrato) ou sem registro adequado geram risco de invalidação da penalidade.</p></div>
       </div>
     </section>
 
@@ -969,12 +963,12 @@ K --> L
           <tr><td>BM2</td><td>Boletim de Documentação Mensal (comprovação de recolhimentos e impostos, conforme COA).</td></tr>
           <tr><td>BUDGET</td><td>Planejamento financeiro de receitas, custos e investimentos do período, base para controle e decisão.</td></tr>
           <tr><td>CGC / CGCP</td><td>Célula de Gestão de Contratos / Célula de Gestão de Contratos e Performance.</td></tr>
-          <tr><td>COA</td><td>Matriz de documentos obrigatórios da contratada (recolhimentos e impostos) validada pela Equipe Info.</td></tr>
+          <tr><td>COA</td><td>Conjunto de Obrigações Acessórias — portal de controle documental (trabalhista, previdenciário, tributário e de compliance) das contratadas, analisado pelo Analista de COA em até 72h úteis.</td></tr>
           <tr><td>COMPLIANCE</td><td>Práticas e controles que garantem conformidade com leis, normas, regulamentos e políticas internas.</td></tr>
           <tr><td>DESMOB</td><td>Desmobilização.</td></tr>
           <tr><td>GFC</td><td>Garantia de Fiel Cumprimento.</td></tr>
           <tr><td>HCT</td><td>Headcount de Terceiros (efetivo aprovado no histograma do contrato).</td></tr>
-          <tr><td>IFS</td><td>Sistema Financeiro corporativo (criação e aprovação de Ordens de Compra).</td></tr>
+          <tr><td>IFS</td><td>Sistema de Gestão Financeira, utilizado para emissão de Ordens de Compra.</td></tr>
           <tr><td>KICK-OFF</td><td>Reunião de início do contrato para alinhamento de escopo, interfaces e regras de medição.</td></tr>
           <tr><td>MOB</td><td>Mobilização.</td></tr>
           <tr><td>MOBI</td><td>Sistema de cadastro e validação documental de colaboradores e empresas para mobilização.</td></tr>
@@ -985,6 +979,7 @@ K --> L
           <tr><td>QEM</td><td>Quadro de Evidências Mínimas (relação de documentos exigidos e periodicidade).</td></tr>
           <tr><td>QQP</td><td>Quadro de Quantidades e Preços.</td></tr>
           <tr><td>SIGEC</td><td>Sistema de gestão de contratos e medições (SIGEC WEB).</td></tr>
+          <tr><td>SLA</td><td>Acordo de Nível de Serviço contratualmente estabelecido.</td></tr>
           <tr><td>SSMA / SSO</td><td>Saúde, Segurança e Meio Ambiente / Saúde e Segurança Ocupacional.</td></tr>
           <tr><td>TAC</td><td>Termo de Aditivo Contratual.</td></tr>
           <tr><td>TEC</td><td>Termo de Encerramento Contratual.</td></tr>
@@ -994,7 +989,7 @@ K --> L
 
     <footer class="foot">
       <span>Célula de Gestão de Contratos · Aura Minerals — Apoena (GAFI)</span>
-      <span>Documentos de referência: POP-BO-GAF-CGC-003 (Gestão Administrativa e Financeira do Contrato) · PIS — Responsabilidades e Atribuições da CGC · Mapa de Processo de Medição · Apresentação institucional de reestruturação</span>
+      <span>Desenho do POP-BO-GAF-CGC-004 — Gestão de Processos da CGC (Aura Minerals · Apoena). Referências: POP-BO-GAF-CGC-003 · Mapa de Processo de Medição · Apresentação institucional Rev. 4 (mar/2026)</span>
     </footer>
 
   </main>
