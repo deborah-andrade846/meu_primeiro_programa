@@ -710,29 +710,41 @@ C5 -->|"Não"| C7
     </section>
 
     <section class="block" id="reajustes">
-      <div class="block-head"><span class="num">14</span><h2>Reajustes</h2></div>
-      <p class="desc">Fluxo não formalizado nos documentos analisados; modelado a partir das práticas de checklist e formalização via TAC já adotadas pela Célula, para tratar a aplicação de índices contratuais.</p>
+      <div class="block-head"><span class="num">14</span><h2>Reajustes Contratuais</h2></div>
+      <p class="desc">Aplicação de índices de reajuste previstos em contrato (ex.: INPC, IPCA, CCT). A CGC identifica a data-base, verifica o índice contratual, calcula o percentual e formaliza os novos valores via TAC — seguindo o mesmo fluxo de absorção de aditivo (equalização na planilha e atualização do QQP no SIGEC). Em caso de divergência na aplicação, o Gestor e o Jurídico são acionados antes da formalização.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
+classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef purple fill:#6a4c93,color:#fff,stroke:#4d3569;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
-A["Identifica data-base de reajuste no contrato"]:::celula --> B["Verifica índice contratual aplicável"]:::celula
-B --> C["Calcula percentual de reajuste"]:::celula
-C --> D{"Aplicação uniforme a todos os itens do QQP?"}:::decisao
-D -->|"Não"| E["Aciona Gestor e Jurídico para alinhamento"]:::purple
-E --> C
-D -->|"Sim"| F["Formaliza valores reajustados via TAC"]:::celula
-F --> G["Atualiza QQP e Planilha de Gestão de Contratos"]:::celula
-G --> H["Aplica novo valor nas próximas medições"]:::celula
+subgraph CG["Célula de Gestão de Contratos"]
+direction TB
+C1["Identifica data-base de reajuste no contrato"]:::celula
+C2["Verifica índice contratual aplicável<br/>(INPC · IPCA · CCT · outro)"]:::celula
+C3["Calcula percentual de reajuste<br/>e realiza equalização na planilha"]:::celula
+C5["Formaliza novos valores via TAC<br/>(segue fluxo de absorção de aditivo)"]:::celula
+C6["Atualiza QQP no SIGEC e planilha de medições"]:::celula
+C7["Aplica novo valor a partir da próxima medição"]:::celula
+end
+
+subgraph AL["Gestor / Jurídico"]
+A1["Alinham critério de aplicação<br/>e validam cálculo divergente"]:::purple
+end
+
+C1 --> C2 --> C3
+C3 --> D{"Aplicação uniforme<br/>a todos os itens do QQP?"}:::decisao
+D -->|"Não / Dúvida"| A1 --> C3
+D -->|"Sim"| C5 --> C6 --> C7
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
           <span><i style="background:#6a4c93"></i>Gestor / Jurídico</span>
-          <span><i style="background:#ffe2b0"></i>Pontos de decisão</span>
+          <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
         </div>
+        <div class="note"><strong>Referência:</strong> após o alinhamento, o reajuste é absorvido como TAC (ver seção 13 — Aditivos). No SIGEC: atualizar o QQP existente com os novos valores ou inserir novo QQP se o aditivo criar itens adicionais. Registrar a data de competência do reajuste na planilha de medições para rastreabilidade em auditoria.</div>
       </div>
     </section>
 

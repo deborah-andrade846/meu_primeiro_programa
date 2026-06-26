@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Gestão de Contratos | CGC — Aura Minerals Apoena</title>
+<style>
+:root{
+  --navy:#13233f;
+  --navy2:#1d3868;
+  --orange:#f1602c;
+  --orange-soft:#fdeae3;
+  --teal:#2f7a78;
+  --slate:#73798c;
+  --purple:#6a4c93;
+  --bg:#f3f5f9;
+  --card:#ffffff;
+  --border:#e3e7ef;
+  --text:#1f2733;
+  --muted:#5c6577;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:Segoe UI, Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.60;
+}
+a{color:var(--orange);text-decoration:none;}
+
+.app{display:flex;min-height:100vh;}
+.sidebar{
+  width:268px;flex-shrink:0;background:var(--navy);color:#dfe6f3;
+  padding:24px 0 40px;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.sidebar .brand{padding:0 22px 18px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:14px;}
+.sidebar .brand .tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:4px;margin-bottom:10px;}
+.sidebar .brand h1{font-size:17px;margin:0 0 4px;color:#fff;font-weight:700;}
+.sidebar .brand p{font-size:12px;color:#9fb0cc;margin:0;}
+.nav-group{margin-bottom:6px;}
+.nav-group h3{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:#7388ad;padding:14px 22px 6px;margin:0;}
+.nav-group a{display:block;padding:7px 22px;font-size:13.3px;color:#cfd9ec;border-left:3px solid transparent;}
+.nav-group a:hover{background:rgba(255,255,255,.06);color:#fff;border-left-color:var(--orange);}
+.main{flex:1;min-width:0;padding:34px 40px 80px;max-width:none;}
+
+header.exec{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  color:#fff;border-radius:14px;padding:34px 38px;margin-bottom:28px;position:relative;overflow:hidden;
+}
+header.exec::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+  border:26px solid var(--orange);opacity:.25;
+}
+header.exec .tag{display:inline-block;background:var(--orange);font-size:11.5px;font-weight:700;letter-spacing:.07em;padding:4px 10px;border-radius:5px;margin-bottom:14px;}
+header.exec h1{font-size:30px;margin:0 0 8px;font-weight:800;}
+header.exec h2{font-size:15px;font-weight:400;color:#cfe0f5;margin:0 0 18px;max-width:760px;}
+header.exec .objetivo{font-size:13.6px;color:#e7edf7;max-width:820px;background:rgba(255,255,255,.07);border-radius:10px;padding:14px 16px;margin-bottom:20px;}
+.meta-row{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#bcd0ec;margin-top:14px;}
+.meta-row span{background:rgba(255,255,255,.09);border-radius:8px;padding:6px 12px;}
+
+section.block{margin-bottom:36px;}
+section.block .block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+section.block .num{font-size:13px;font-weight:800;color:#fff;background:var(--navy2);border-radius:6px;padding:3px 9px;}
+section.block h2{font-size:21px;margin:0;color:var(--navy);font-weight:800;}
+section.block p.desc{font-size:13.6px;color:var(--muted);margin:6px 0 16px;max-width:880px;}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 26px;box-shadow:0 1px 3px rgba(20,30,60,.04);}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+
+.mini-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.mini-card h4{margin:0 0 8px;font-size:14px;color:var(--navy2);font-weight:700;}
+.mini-card p{margin:0;font-size:12.8px;color:var(--muted);line-height:1.55;}
+.mini-card.prin{border-left:4px solid var(--teal);}
+.mini-card.veda{border-left:4px solid var(--orange);}
+.mini-card.resp{border-left:4px solid var(--navy2);}
+.mini-card.sanc{border-left:4px solid var(--purple);}
+.mini-card .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:2px 7px;margin-bottom:8px;}
+.badge.prin{background:#dceee0;color:#1f7a3d;}
+.badge.veda{background:#fde2da;color:#b8341a;}
+.badge.resp{background:#e4e9f5;color:var(--navy2);}
+.badge.sanc{background:#ece8f5;color:var(--purple);}
+.badge.ctrl{background:#dceee0;color:#1f7a3d;}
+
+.rule-block{background:var(--orange-soft);border:1px solid rgba(241,96,44,.35);border-radius:10px;padding:18px 22px;margin-bottom:14px;}
+.rule-block h3{font-size:14.5px;margin:0 0 10px;color:#b8341a;font-weight:800;}
+.rule-block ol{margin:0;padding-left:20px;}
+.rule-block ol li{font-size:13.2px;color:#5b2a10;margin-bottom:6px;}
+
+.alcada-table{width:100%;border-collapse:collapse;font-size:13px;}
+.alcada-table th,.alcada-table td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top;}
+.alcada-table th{background:var(--navy);color:#fff;font-weight:600;font-size:12px;}
+.alcada-table td:first-child{font-weight:600;color:var(--navy2);background:#f8f9fc;}
+.alcada-table .val{font-weight:700;color:var(--orange);}
+
+.cls-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
+@media(max-width:900px){.cls-grid{grid-template-columns:1fr 1fr;}}
+.cls-card{border-radius:10px;padding:14px 16px;color:#fff;}
+.cls-card h4{font-size:13.5px;margin:0 0 6px;font-weight:800;}
+.cls-card p{font-size:12px;margin:0;opacity:.9;}
+
+.note{margin-top:14px;background:#f1f4fb;border-left:4px solid var(--navy2);border-radius:8px;padding:11px 15px;font-size:12.6px;color:var(--muted);}
+.note strong{color:var(--navy2);}
+
+.divider{border:none;border-top:1px solid var(--border);margin:30px 0;}
+
+footer.foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:880px){
+  .app{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:relative;padding:16px 0;}
+  .main{padding:22px 16px 60px;}
+  header.exec{padding:24px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <nav class="sidebar">
+    <div class="brand">
+      <span class="tag">AURA MINERALS · APOENA</span>
+      <h1>Política de Gestão de Contratos</h1>
+      <p>CGC — GAFI</p>
+    </div>
+    <div class="nav-group">
+      <h3>Documento</h3>
+      <a href="#cabecalho">Cabeçalho</a>
+      <a href="#objetivo">Objetivo e Escopo</a>
+      <a href="#principios">Princípios</a>
+    </div>
+    <div class="nav-group">
+      <h3>Regras</h3>
+      <a href="#regras-ouro">Regras de Ouro</a>
+      <a href="#alcadas">Alçadas de Aprovação</a>
+      <a href="#classificacao">Classificação de Contratos</a>
+    </div>
+    <div class="nav-group">
+      <h3>Governança</h3>
+      <a href="#responsabilidades">Responsabilidades</a>
+      <a href="#controles">Controles Obrigatórios</a>
+      <a href="#sancoes">Sanções e Penalidades</a>
+      <a href="#vigencia-doc">Vigência e Revisão</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- CABEÇALHO -->
+    <header class="exec" id="cabecalho">
+      <span class="tag">POLÍTICA INTERNA · GESTÃO DE CONTRATOS</span>
+      <h1>Política de Gestão de Contratos</h1>
+      <h2>Célula de Gestão de Contratos (CGC) — GAFI, Aura Minerals, Unidade Apoena</h2>
+      <div class="objetivo">
+        Estabelecer os princípios, regras e diretrizes que orientam a gestão de contratos na Unidade Apoena, garantindo conformidade, transparência, segregação de funções e proteção financeira e jurídica da organização ao longo de todo o ciclo de vida contratual.
+      </div>
+      <div class="meta-row">
+        <span>Código: POL-BO-GAF-CGC-001</span>
+        <span>Versão: 1.0</span>
+        <span>Aprovação: jun/2026</span>
+        <span>Revisão: anual ou quando necessário</span>
+        <span>Responsável: CGC / GAFI</span>
+      </div>
+    </header>
+
+    <!-- 1. OBJETIVO E ESCOPO -->
+    <section class="block" id="objetivo">
+      <div class="block-head"><span class="num">01</span><h2>Objetivo e Escopo</h2></div>
+      <p class="desc">Esta Política define os princípios e as regras que devem ser seguidos por todos os envolvidos na gestão de contratos da Unidade Apoena.</p>
+      <div class="card">
+        <p style="font-size:13.5px;color:var(--text);margin:0 0 14px;"><strong>Objetivo:</strong> padronizar a administração contratual, garantir compliance documental, mitigar riscos jurídicos e financeiros, assegurar o fluxo correto de pagamento das contratadas e promover a melhoria contínua dos processos.</p>
+        <p style="font-size:13.5px;color:var(--text);margin:0 0 14px;"><strong>Escopo:</strong> aplica-se a todos os contratos administrados pela CGC/GAFI, abrangendo as fases de pré-contratação (análise de RC), cadastro, mobilização, gestão documental, medição, faturamento, pagamento, aditivos, reajustes e encerramento contratual.</p>
+        <p style="font-size:13.5px;color:var(--text);margin:0;"><strong>Abrangência:</strong> Gestores, Fiscais, Analistas da CGC, Administradores de Contrato, Suprimentos, Financeiro, Jurídico e Contratadas que operam contratos administrados pela CGC da Unidade Apoena.</p>
+      </div>
+    </section>
+
+    <!-- 2. PRINCÍPIOS -->
+    <section class="block" id="principios">
+      <div class="block-head"><span class="num">02</span><h2>Princípios da Gestão Contratual</h2></div>
+      <p class="desc">Valores que orientam todas as decisões e ações no ciclo de vida dos contratos.</p>
+      <div class="grid-3">
+        <div class="mini-card prin"><span class="badge prin">Transparência</span><h4>Rastreabilidade total</h4><p>Toda medição, aprovação, bloqueio e liberação deve ser registrada no SIGEC, garantindo trilha de auditoria completa.</p></div>
+        <div class="mini-card prin"><span class="badge prin">Segregação</span><h4>Funções independentes</h4><p>A sequência de aprovação do BM (Preposto → Fiscal → Gestor → CGC) é obrigatória, inviolável e não invertível.</p></div>
+        <div class="mini-card prin"><span class="badge prin">Compliance</span><h4>Conformidade contínua</h4><p>A documentação trabalhista, previdenciária e tributária (COA) deve estar aprovada antes de qualquer liberação de pagamento.</p></div>
+        <div class="mini-card prin"><span class="badge prin">Proporcionalidade</span><h4>Risco x Exigência</h4><p>As exigências documentais devem ser proporcionais ao risco e à complexidade de cada contrato, evitando morosidade desproporcional.</p></div>
+        <div class="mini-card prin"><span class="badge prin">Prevenção</span><h4>Gestão preventiva</h4><p>A CGC participa da análise da RC antes da contratação e monitora vigência e saldo com antecedência, evitando execução sem cobertura contratual.</p></div>
+        <div class="mini-card prin"><span class="badge prin">Melhoria contínua</span><h4>Aprendizado e evolução</h4><p>Auditorias preventivas, reuniões periódicas com fornecedores e PDI da equipe são instrumentos permanentes de desenvolvimento do processo.</p></div>
+      </div>
+    </section>
+
+    <!-- 3. REGRAS DE OURO -->
+    <section class="block" id="regras-ouro">
+      <div class="block-head"><span class="num">03</span><h2>Regras de Ouro — Vedações Absolutas</h2></div>
+      <p class="desc">As regras abaixo são inegociáveis. Qualquer desvio deve ser reportado imediatamente à liderança da CGC e registrado para fins de auditoria e tratamento de não conformidade.</p>
+      <div class="rule-block">
+        <h3>É VEDADO — sem exceção</h3>
+        <ol>
+          <li>Aprovar BM sem a sequência completa e em ordem: <strong>Preposto → Fiscal → Gestor → Analista CGC</strong>.</li>
+          <li>Iniciar execução de contrato Classe I ou II sem a realização formal do <strong>Kick-off</strong>.</li>
+          <li>Executar serviços <strong>fora do escopo contratado</strong> sem TAC ou documento oficial emitido pela Aura.</li>
+          <li>Realizar ou aceitar medição <strong>fora do SIGEC WEB</strong> (e-mail, planilha avulsa, verbal).</li>
+          <li>Autorizar emissão de NF sem aprovação completa do BM e sem Ordem de Compra emitida no IFS.</li>
+          <li>Aprovar BM com <strong>COA pendente</strong> ou com qualquer documento do QEM ausente.</li>
+          <li>Permitir <strong>mobilização de efetivo acima do HCT</strong> aprovado sem aditivo ou histograma revisado.</li>
+          <li>Aplicar reajuste ou alterar valores do QQP <strong>sem formalização via TAC</strong>.</li>
+          <li>Cadastrar usuário do fornecedor com <strong>perfil de aprovador (Fiscal)</strong> no mesmo contrato.</li>
+          <li>Efetuar pagamento de <strong>medição retroativa</strong> sem aprovação prévia da liderança da CGC e do Gestor.</li>
+        </ol>
+      </div>
+      <div class="note"><strong>Consequência do desvio:</strong> o processo é paralisado até regularização formal. Desvios recorrentes ativam a escala de notificação contratual: Conversa → Notificação → Multa → Distrato. Internamente, desvios praticados por colaboradores da Aura são tratados conforme o Código de Conduta e as políticas disciplinares vigentes.</div>
+    </section>
+
+    <!-- 4. ALÇADAS -->
+    <section class="block" id="alcadas">
+      <div class="block-head"><span class="num">04</span><h2>Alçadas de Aprovação</h2></div>
+      <p class="desc">Além da sequência obrigatória (Preposto → Fiscal → Gestor → CGC), aprovações complementares são exigidas conforme o valor do BM. A ausência da alçada correspondente impede o pagamento e a contabilização.</p>
+      <div class="card" style="overflow-x:auto;">
+        <table class="alcada-table">
+          <tr><th>Faixa de valor (BM)</th><th>Aprovação complementar obrigatória</th><th>Observação</th></tr>
+          <tr><td>Até R$ 10.000</td><td>Analista CGC (validação administrativa)</td><td>Sequência padrão suficiente</td></tr>
+          <tr><td class="val">Acima de R$ 10.000</td><td>Coordenador da CGC</td><td>Além da sequência padrão</td></tr>
+          <tr><td class="val">R$ 20.000 a R$ 500.000</td><td>Gerente</td><td>Além da sequência padrão</td></tr>
+          <tr><td class="val">Acima de R$ 500.000</td><td>Diretor</td><td>Além da sequência padrão</td></tr>
+        </table>
+        <div class="note" style="margin-top:14px;"><strong>Amostragem:</strong> em todos os casos, a CGC realiza amostragem mínima de <strong>10% das evidências</strong> do BM, ampliável conforme a complexidade ou o risco do contrato.</div>
+      </div>
+    </section>
+
+    <!-- 5. CLASSIFICAÇÃO -->
+    <section class="block" id="classificacao">
+      <div class="block-head"><span class="num">05</span><h2>Classificação de Contratos</h2></div>
+      <p class="desc">Os contratos são classificados por valor global em quatro classes, que determinam os requisitos obrigatórios de governança, Kick-off e QEM.</p>
+      <div class="cls-grid">
+        <div class="cls-card" style="background:#13233f;">
+          <h4>Classe I — Estratégicos</h4>
+          <p>Maior nível de governança e acompanhamento. Kick-off obrigatório. QEM obrigatório.</p>
+        </div>
+        <div class="cls-card" style="background:#1d3868;">
+          <h4>Classe II — Relevantes</h4>
+          <p>Kick-off obrigatório. QEM obrigatório.</p>
+        </div>
+        <div class="cls-card" style="background:#2f7a78;">
+          <h4>Classe III — Significativos</h4>
+          <p>QEM obrigatório. Kick-off conforme criticidade.</p>
+        </div>
+        <div class="cls-card" style="background:#73798c;">
+          <h4>Classe IV — Operacionais</h4>
+          <p>Acompanhamento conforme a criticidade do contrato.</p>
+        </div>
+      </div>
+      <div class="note"><strong>Reclassificação:</strong> aditivos que alteram o valor global do contrato implicam reclassificação automática e atualização dos requisitos de governança aplicáveis. A reclassificação é registrada pela CGC na Planilha de Gestão de Contratos e no SIGEC.</div>
+    </section>
+
+    <!-- 6. RESPONSABILIDADES -->
+    <section class="block" id="responsabilidades">
+      <div class="block-head"><span class="num">06</span><h2>Responsabilidades por Papel</h2></div>
+      <p class="desc">Cada ator do ciclo contratual tem responsabilidades definidas e indelegáveis. A delegação informal não é aceita como justificativa para desvios.</p>
+      <div class="grid-2">
+        <div class="mini-card resp"><span class="badge resp">CGC / Administrador</span><h4>Célula de Gestão de Contratos</h4><p>Define diretrizes, padroniza processos, monitora indicadores, audita contratos, apoia Gestores e Fiscais, emite notificações e conduz o ciclo administrativo do contrato do cadastro ao encerramento.</p></div>
+        <div class="mini-card resp"><span class="badge resp">Gestor</span><h4>Gestor do Contrato</h4><p>Garante o cumprimento do contrato em todos os aspectos (técnico, financeiro, legal e operacional), aprova medições dentro de sua alçada, gerencia riscos e desvios, e responde pelo contrato perante a organização.</p></div>
+        <div class="mini-card resp"><span class="badge resp">Fiscal</span><h4>Fiscal do Contrato</h4><p>Fiscaliza a execução em campo, valida medições com base em evidências físicas e documentais, registra ocorrências e desvios, e reporta ao Gestor qualquer não conformidade.</p></div>
+        <div class="mini-card resp"><span class="badge resp">Preposto</span><h4>Preposto da Contratada</h4><p>Representa formalmente a contratada, garante a execução conforme o escopo, submete medições e evidências no prazo, e responde por não conformidades e ações corretivas.</p></div>
+        <div class="mini-card resp"><span class="badge resp">Suprimentos</span><h4>Suprimentos</h4><p>Conduz o processo de contratação, elabora e envia o contrato assinado à CGC. Formaliza Termos de Aditivo e de Encerramento com apoio do Jurídico.</p></div>
+        <div class="mini-card resp"><span class="badge resp">Financeiro</span><h4>Financeiro / Controladoria</h4><p>Programa e efetua o pagamento nos ciclos mensais (dias 05 e 20), gerencia bloqueios de NF por pendência documental, e informa à CGC as datas efetivas de pagamento no SIGEC.</p></div>
+      </div>
+    </section>
+
+    <!-- 7. CONTROLES -->
+    <section class="block" id="controles">
+      <div class="block-head"><span class="num">07</span><h2>Controles Obrigatórios</h2></div>
+      <p class="desc">Controles que devem ser verificados pela CGC em cada ciclo de medição e pagamento. O não cumprimento de qualquer item paralisa o processo até regularização.</p>
+      <div class="grid-2">
+        <div class="mini-card"><span class="badge ctrl">Pré-medição</span><h4>Kick-off realizado (Classe I e II)</h4><p>QEM preenchido e divulgado ao Preposto, Gestor e Fiscal. Ausência de qualquer documento do QEM impede o início da análise do BM.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Medição</span><h4>BM exclusivamente no SIGEC WEB</h4><p>Medições por e-mail ou fora do sistema não são aceitas. O SIGEC garante o abatimento de saldo e a rastreabilidade para auditoria.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Aprovação</span><h4>Sequência Preposto → Fiscal → Gestor → CGC</h4><p>Não invertível. A conclusão sem a anuência expressa de todos é vedada e invalida o BM.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Documental</span><h4>COA aprovado antes da liberação de pagamento</h4><p>Documentação trabalhista e tributária validada pelo Analista de COA em até 72h úteis. NFs com COA pendente ficam bloqueadas.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Financeiro</span><h4>OC emitida no IFS antes da NF</h4><p>A Ordem de Compra deve ser criada no IFS com base no BM aprovado antes da autorização de emissão da Nota Fiscal.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Saldo</span><h4>Verificação de saldo a cada medição</h4><p>Após cada BM aprovado, a CGC atualiza o saldo. Saldo insuficiente ou BM-COA reprovado bloqueia pagamento e notifica o Gestor.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Vigência</span><h4>Farol de Contratos — alertas 30/60/90 dias</h4><p>CGC emite relatório e notifica Gestor ao identificar contrato próximo do vencimento. Ausência de retorno da área resulta em registro como encerrado.</p></div>
+        <div class="mini-card"><span class="badge ctrl">Aditivo / Reajuste</span><h4>Formalização obrigatória via TAC</h4><p>Qualquer alteração de valor, prazo, escopo ou reajuste de índice contratual deve ser formalizada em Termo de Aditivo antes da aplicação nas medições.</p></div>
+      </div>
+    </section>
+
+    <!-- 8. SANÇÕES -->
+    <section class="block" id="sancoes">
+      <div class="block-head"><span class="num">08</span><h2>Sanções e Tratamento de Não Conformidades</h2></div>
+      <p class="desc">Desvios contratuais praticados pela Contratada são tratados pela CGC com apoio do Gestor e do Jurídico, seguindo a escala formal abaixo. Internamente, desvios de colaboradores da Aura são tratados conforme o Código de Conduta.</p>
+      <div class="card">
+        <div style="display:flex;gap:0;flex-wrap:wrap;">
+
+          <div style="flex:1;min-width:180px;padding:18px 20px;border-right:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px;">Etapa 1</div>
+            <div style="font-size:16px;font-weight:800;color:var(--teal);margin-bottom:6px;">Conversa</div>
+            <p style="font-size:12.5px;color:var(--muted);margin:0;">Alinhamento formal com a Contratada. CGC apoia o Gestor com informações previstas em contrato.</p>
+          </div>
+
+          <div style="flex:1;min-width:180px;padding:18px 20px;border-right:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px;">Etapa 2</div>
+            <div style="font-size:16px;font-weight:800;color:var(--navy2);margin-bottom:6px;">Notificação</div>
+            <p style="font-size:12.5px;color:var(--muted);margin:0;">Notificação Contratual emitida pela CGC via Jurídico, com prazo formal para regularização.</p>
+          </div>
+
+          <div style="flex:1;min-width:180px;padding:18px 20px;border-right:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px;">Etapa 3</div>
+            <div style="font-size:16px;font-weight:800;color:var(--orange);margin-bottom:6px;">Multa</div>
+            <p style="font-size:12.5px;color:var(--muted);margin:0;">Aplicação de multa conforme cláusula contratual. Formalizada e registrada com evidências.</p>
+          </div>
+
+          <div style="flex:1;min-width:180px;padding:18px 20px;">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px;">Etapa 4</div>
+            <div style="font-size:16px;font-weight:800;color:#b8341a;margin-bottom:6px;">Distrato</div>
+            <p style="font-size:12.5px;color:var(--muted);margin:0;">Encerramento contratual por descumprimento ou reincidência. Conduzido com Jurídico e Suprimentos.</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="note"><strong>Importante:</strong> qualquer penalidade aplicada fora da escala formal, sem registro no SIGEC ou sem embasamento em cláusula contratual, pode ser invalidada em litígio. A CGC deve documentar todas as etapas com evidências antes de avançar para a próxima.</div>
+    </section>
+
+    <!-- 9. VIGÊNCIA DO DOCUMENTO -->
+    <section class="block" id="vigencia-doc">
+      <div class="block-head"><span class="num">09</span><h2>Vigência e Revisão da Política</h2></div>
+      <p class="desc">Esta Política entra em vigor na data de sua aprovação e deve ser revisada periodicamente ou sempre que houver mudança relevante no modelo operacional, na estrutura da equipe ou nos requisitos regulatórios.</p>
+      <div class="card">
+        <div class="grid-2">
+          <div>
+            <h4 style="font-size:14px;color:var(--navy2);margin:0 0 10px;">Periodicidade de revisão</h4>
+            <ul style="font-size:13.2px;color:var(--muted);margin:0;padding-left:18px;line-height:1.8;">
+              <li>Revisão anual ordinária pela CGC</li>
+              <li>Revisão extraordinária por mudança de modelo operacional, resultado de auditoria ou alteração normativa relevante</li>
+              <li>Toda revisão deve ser aprovada pela Gerência de GAFI e registrada com nova versão e data</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:14px;color:var(--navy2);margin:0 0 10px;">Documentos relacionados</h4>
+            <ul style="font-size:13.2px;color:var(--muted);margin:0;padding-left:18px;line-height:1.8;">
+              <li>POP-BO-GAF-CGC-004 — Gestão de Processos da CGC (Apoena)</li>
+              <li>POP-BO-GAF-CGC-003 — Gestão Administrativa e Financeira do Contrato (Borborema)</li>
+              <li>Mapeamento Executivo de Processos CGC — GAFI</li>
+              <li>Manual do SIGEC — Sistema de Gestão de Contratos</li>
+              <li>Norma Interna de Gestão de Contratos — Aura Minerals</li>
+              <li>Código de Conduta Aura Minerals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>Célula de Gestão de Contratos · Aura Minerals — Apoena (GAFI)</span>
+      <span>POL-BO-GAF-CGC-001 · Versão 1.0 · jun/2026 · Elaboração: CGC/GAFI</span>
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>
