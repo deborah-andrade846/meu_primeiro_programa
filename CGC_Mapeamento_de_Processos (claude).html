@@ -160,9 +160,9 @@ footer.foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--border);
       <a href="#cadastro">Cadastro Contratual</a>
       <a href="#mobilizacao">Mobilização e Kick-off</a>
       <a href="#documental">Gestão Documental</a>
-      <a href="#medicoes">Medições</a>
-      <a href="#aprovacao-bm">Aprovação de BM</a>
+      <a href="#medicoes">Medição e Aprovação de BM</a>
       <a href="#nota-fiscal">Emissão de Nota Fiscal</a>
+      <a href="#bloqueio-nf">Bloqueio de NF (COA)</a>
       <a href="#pagamento">Fluxo de Pagamento</a>
       <a href="#saldo">Gestão de Saldo</a>
       <a href="#vigencia">Gestão de Vigência</a>
@@ -440,8 +440,8 @@ V1 -->|"Sim"| A3
     </section>
 
     <section class="block" id="medicoes">
-      <div class="block-head"><span class="num">07</span><h2>Medições</h2></div>
-      <p class="desc">Fluxo operacional da medição no SIGEC WEB: a Contratada elabora o BM1 (Prestação de Serviços, com evidências) e o BM2 (Documentação Mensal, com comprovação de impostos conforme COA). A Célula avalia, recusa em caso de não conformidade e encaminha para aprovação do Fiscal e do Gestor.</p>
+      <div class="block-head"><span class="num">07</span><h2>Medição e Aprovação de BM</h2></div>
+      <p class="desc">A Contratada elabora o BM1 (serviços + evidências) e o BM2 (documentação mensal) no SIGEC WEB. A sequência de aprovação é obrigatória e não invertível — Preposto → Fiscal → Gestor → Analista CGC — com alçada complementar por valor e amostragem mínima de 10% das evidências. A ausência de qualquer aprovação ou documento do QEM impede o prosseguimento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
@@ -452,79 +452,53 @@ classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
 subgraph FO["Fornecedor (Preposto)"]
 direction TB
-F1["Elabora BM (serviços) + evidências no SIGEC WEB"]:::fornecedor
-F3["Corrige BM e reenvia"]:::fornecedor
+F1["Elabora BM1 (serviços + evidências)<br/>e BM2 (documentação mensal) no SIGEC WEB"]:::fornecedor
+F2["Corrige BM e reenvia"]:::fornecedor
 end
 
 subgraph CG["Célula de Gestão de Contratos"]
 direction TB
-C1["Recebe BM — analisa medição e evidências"]:::celula
-C2{"Medição conforme contrato e evidências OK?"}:::decisao
-C3["Encaminha para aprovação do Fiscal"]:::celula
-C4["Lança medição no IFS"]:::celula
+C1["Recebe BM — analisa medição,<br/>evidências e conformidade com QQP"]:::celula
+C2{"Medição conforme contrato<br/>e evidências OK?"}:::decisao
+C3["Encaminha ao Fiscal para validação técnica"]:::celula
+C6{"Valor total do BM"}:::decisao
+C7["Aprovação do Coordenador (≥ R$ 10 mil)"]:::celula
+C8["Aprovação do Gerente (R$ 20 mil – R$ 500 mil)"]:::celula
+C9["Aprovação do Diretor (acima de R$ 500 mil)"]:::celula
+C10["Amostragem mínima de 10% das evidências<br/>(ampliável conforme complexidade)"]:::celula
+C11["Lança medição no IFS · Libera emissão de NF"]:::celula
 end
 
 subgraph FG["Fiscal e Gestor do Contrato"]
 direction TB
-FI1{"Fiscal aprova a medição no SIGEC?"}:::decisao
-GE1{"Gestor aprova a medição no SIGEC?"}:::decisao
+FI1{"Fiscal aprova no SIGEC?"}:::decisao
+GE1{"Gestor aprova no SIGEC?"}:::decisao
 end
 
 F1 --> C1 --> C2
-C2 -->|"Recusada"| F3 --> F1
+C2 -->|"Recusada"| F2 --> F1
 C2 -->|"Aprovada"| C3 --> FI1
-FI1 -->|"Reprovado"| F3
+FI1 -->|"Reprovado"| F2
 FI1 -->|"Aprovado"| GE1
-GE1 -->|"Reprovado"| F3
-GE1 -->|"Aprovado"| C4
+GE1 -->|"Reprovado"| F2
+GE1 -->|"Aprovado"| C6
+C6 -->|"≥ R$ 10 mil"| C7 --> C10
+C6 -->|"R$ 20 mil – R$ 500 mil"| C8 --> C10
+C6 -->|"Acima R$ 500 mil"| C9 --> C10
+C10 --> C11
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
           <span><i style="background:#2f7a78"></i>Fiscal / Gestor</span>
-          <span><i style="background:#f1602c"></i>Fornecedor</span>
+          <span><i style="background:#f1602c"></i>Fornecedor (Preposto)</span>
           <span><i style="background:#ffe2b0"></i>Pontos de decisão</span>
         </div>
-        <div class="note"><strong>Controle:</strong> em caso de divergência nas informações, o processo permanece <strong>parado até a regularização</strong> da pendência. A medição deve ocorrer exclusivamente pelo SIGEC WEB para garantir o abatimento de saldo e a rastreabilidade exigida em auditoria.</div>
-      </div>
-    </section>
-
-    <section class="block" id="aprovacao-bm">
-      <div class="block-head"><span class="num">08</span><h2>Aprovação de Boletim de Medição</h2></div>
-      <p class="desc">Sequência obrigatória e não invertível de validação, com alçada complementar conforme o valor do BM e amostragem mínima de 10% das evidências. A ausência de qualquer aprovação obrigatória ou da alçada correspondente impede o pagamento e a contabilização.</p>
-      <div class="card">
-        <div class="diagram"><div class="mermaid">
-flowchart TB
-classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
-classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
-classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
-classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
-
-subgraph SEQ["Sequência obrigatória de validação"]
-direction LR
-P1["Preposto: elabora BM e anexa<br/>documentos comprobatórios"]:::fornecedor --> F1["Fiscal: conferência técnica<br/>e validação quanti/qualitativa"]:::gestor --> G1["Gestor: análise gerencial,<br/>orçamentária e de escopo"]:::gestor --> A1["Analista CGC: validação administrativa<br/>e documental final · libera NF"]:::celula
-end
-
-A1 --> D1{"Valor total do BM"}:::decisao
-D1 -->|"Acima de R$ 10 mil"| AL1["Aprovação do Coordenador"]:::celula
-D1 -->|"R$ 20 mil a R$ 500 mil"| AL2["Aprovação do Gerente"]:::celula
-D1 -->|"Acima de R$ 500 mil"| AL3["Aprovação do Diretor"]:::celula
-AL1 --> AM["Amostragem mínima de 10% das evidências<br/>(ampliável conforme complexidade)"]:::celula
-AL2 --> AM
-AL3 --> AM
-AM --> LIB["BM liberado para emissão de NF e pagamento"]:::celula
-        </div></div>
-        <div class="legend">
-          <span><i style="background:#f1602c"></i>Preposto / Contratada</span>
-          <span><i style="background:#2f7a78"></i>Fiscal / Gestor</span>
-          <span><i style="background:#13233f"></i>Célula (Analista do Contrato)</span>
-          <span><i style="background:#ffe2b0"></i>Ponto de decisão (alçada)</span>
-        </div>
-        <div class="note"><strong>Fluxo eletrônico de assinatura (SIGEC):</strong> a aprovação eletrônica observa, obrigatoriamente, a sequência <strong>Preposto → Fiscal → Gestor → Analista (CGC)</strong>, vedada a conclusão sem a anuência expressa de todos. As demais pessoas que assinam o BM, por não acompanharem a rotina do contrato, não respondem por não conformidades, mas qualquer desvio identificado deve ser reportado e paralisa a medição até esclarecimento.</div>
+        <div class="note"><strong>Regra de bloqueio:</strong> em caso de divergência, o processo permanece <strong>parado até a regularização</strong> da pendência. A medição deve ocorrer exclusivamente pelo SIGEC WEB para garantir o abatimento de saldo e a rastreabilidade exigida em auditoria. O BM deve ser recusado com registro do motivo no SIGEC em qualquer hipótese de não conformidade (item/quantidade/preço divergente do QQP, ausência de evidências, COA com pendência, GFC vencida).</div>
       </div>
     </section>
 
     <section class="block" id="nota-fiscal">
-      <div class="block-head"><span class="num">09</span><h2>Emissão de Nota Fiscal</h2></div>
+      <div class="block-head"><span class="num">08</span><h2>Emissão de Nota Fiscal</h2></div>
       <p class="desc">Liberação sistêmica para emissão da NF após aprovação do BM1, com abertura da Ordem de Compra conforme o boletim de medição e verificação de conformidade antes do protocolo junto ao setor Fiscal.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -557,9 +531,56 @@ F2 -->|"Sim"| C3 --> C4
       </div>
     </section>
 
+    <section class="block" id="bloqueio-nf">
+      <div class="block-head"><span class="num">09</span><h2>Bloqueio e Liberação de NF (COA)</h2></div>
+      <p class="desc">Verificação das Notas Fiscais bloqueadas por pendência documental no COA. A CGC confere a situação de cada contrato, mantém o bloqueio enquanto houver pendência e libera o pagamento após regularização — com comunicação formal aos Fiscais responsáveis.</p>
+      <div class="card">
+        <div class="diagram"><div class="mermaid">
+flowchart TB
+classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
+classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
+classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
+classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
+
+subgraph CG["Célula de Gestão de Contratos"]
+direction TB
+C1["Acessa planilha 'Notas Bloqueadas'<br/>e identifica contratos com pendência no COA"]:::celula
+C3["Extrai relação de documentos pendentes no COA<br/>e compila planilha consolidada"]:::celula
+C4["Atualiza planilha do Financeiro<br/>(acrescenta bloqueios · registra liberações)"]:::celula
+C5["Envia e-mail aos Fiscais com bloqueios,<br/>planilha do Fiscal atualizada e prints das NFs bloqueadas"]:::celula
+end
+
+subgraph FO["Contratada"]
+F1["Regulariza documentação pendente no COA"]:::fornecedor
+end
+
+subgraph VL["Analista de COA / Financeiro"]
+direction TB
+V1{"Pendência documental<br/>no COA para o período da NF?"}:::decisao
+V2["Libera NF para pagamento"]:::apoio
+V3["Mantém NF bloqueada"]:::apoio
+V4["Verifica NFs adicionais no SIGEC<br/>(novas NFs além da lista)"]:::apoio
+end
+
+C1 --> V1
+V1 -->|"Não"| V2
+V1 -->|"Sim"| V3 --> C3 --> C4 --> C5 --> F1 --> V1
+V2 --> V4
+V4 --> V1
+        </div></div>
+        <div class="legend">
+          <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
+          <span><i style="background:#73798c"></i>Analista de COA / Financeiro</span>
+          <span><i style="background:#f1602c"></i>Contratada</span>
+          <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
+        </div>
+        <div class="note"><strong>Atenção:</strong> nos dias 15 e 16 de cada mês, a CGC identifica por área quais empresas não enviaram medições ou NFs e entra em contato com as áreas para registrar a situação. Para validar se uma NF pertence ao CGC, acessar o IFS e confirmar a área antes de qualquer movimentação.</div>
+      </div>
+    </section>
+
     <section class="block" id="pagamento">
       <div class="block-head"><span class="num">10</span><h2>Fluxo de Pagamento</h2></div>
-      <p class="desc">Classificação de impostos pelo setor Fiscal, criação das Ordens de Compra no sistema Financeiro (IFS) e envio do processo completo ao Financeiro com no mínimo 10 dias corridos de antecedência ao pagamento.</p>
+      <p class="desc">A CGC gera o BOOK do SIGEC (BM aprovado + NF) e encaminha ao Financeiro para programação dentro dos ciclos mensais (dias 05 e 20). O Financeiro lança a NF, levanta garantias e efetua o pagamento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
@@ -569,29 +590,27 @@ classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 
 subgraph CG["Célula de Gestão de Contratos"]
 direction TB
-C1["Envia NF + BM (PDF) ao setor Fiscal para classificação de impostos"]:::celula
-C2["Inclui valores e data prevista de pagamento no SIGEC"]:::celula
-C3["Cria Ordens de Compra no Financeiro (IFS)"]:::celula
-C4["Monta processo: NF + retorno fiscal + BM SIGEC + OC IFS"]:::celula
-C5["Envia ao Financeiro com ≥ 10 dias corridos de antecedência"]:::celula
+C1["Gera BOOK do SIGEC (BM aprovado + NF)"]:::celula
+C2["Finaliza BMS no SIGEC"]:::celula
+C3["Confirma OC no IFS e vincula NF à linha correspondente"]:::celula
 end
 
-subgraph FN["Fiscal / Financeiro / Controladoria"]
+subgraph FN["Financeiro / Controladoria"]
 direction TB
-T1["Fiscal classifica impostos, retenções e valor líquido"]:::apoio
-F2["Levanta NFs e garantias aplicadas"]:::apoio
-F3["Efetua pagamento e informa data efetiva no SIGEC"]:::apoio
+F1["Lança NF para programação de pagamento"]:::apoio
+F2["Levanta NFs e garantias aplicáveis"]:::apoio
+F3["Programa pagamento nos ciclos mensais<br/>(dias 05 e 20) e informa data prevista"]:::apoio
 end
 
 subgraph FO["Fornecedor"]
 G1["Recebe pagamento da NF"]:::fornecedor
 end
 
-C1 --> T1 --> C2 --> C3 --> C4 --> C5 --> F2 --> F3 --> G1
+C1 --> C2 --> C3 --> F1 --> F2 --> F3 --> G1
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
-          <span><i style="background:#73798c"></i>Fiscal / Financeiro / Controladoria</span>
+          <span><i style="background:#73798c"></i>Financeiro / Controladoria</span>
           <span><i style="background:#f1602c"></i>Fornecedor</span>
         </div>
       </div>
@@ -650,7 +669,7 @@ E -->|"Sem retorno da área"| H["Atualiza planilha como contrato encerrado"]:::c
 
     <section class="block" id="aditivos">
       <div class="block-head"><span class="num">13</span><h2>Aditivos</h2></div>
-      <p class="desc">Formalização de Termos de Aditivo Contratual (TAC), com reclassificação do contrato quando o aditivo altera o valor global.</p>
+      <p class="desc">Absorção do Termo de Aditivo Contratual (TAC) pela CGC: leitura e identificação do tipo de alteração (valor, prazo, QQP), equalização na planilha, atualização do SIGEC e reclassificação do contrato quando o aditivo altera o valor global.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
@@ -659,33 +678,34 @@ classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef purple fill:#6a4c93,color:#fff,stroke:#4d3569;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
-subgraph GE["Gestor / Área Demandante"]
-D1["Identifica necessidade de Aditivo (TAC)"]:::apoio
+subgraph JS["Jurídico / Suprimentos"]
+J1["Formaliza TAC (Jurídico + Gestor + Contratada assinam)"]:::purple
 end
 
 subgraph CG["Célula de Gestão de Contratos"]
 direction TB
-C1["Cadastra TAC na Planilha de Gestão"]:::celula
-C2["Analisa TAC conforme checklist do processo"]:::celula
-C3{"TAC aprovado?"}:::decisao
-C4["Reclassifica o contrato, se aplicável"]:::celula
-C5["Atualiza vigência e valor global"]:::celula
+C1["Recebe TAC e realiza leitura completa:<br/>identifica tipo de alteração"]:::celula
+C2{"Tipo de alteração?"}:::decisao
+C3["Equalização de valores na planilha<br/>Atualiza QQP no SIGEC (valor / itens)"]:::celula
+C4["Atualiza prazo no SIGEC<br/>e na planilha de medições"]:::celula
+C5{"Aditivo altera valor global?"}:::decisao
+C6["Reclassifica o contrato por valor global"]:::celula
+C7["Responde e-mail confirmando absorção<br/>e atualizações no sistema"]:::celula
 end
 
-subgraph JS["Jurídico / Suprimentos"]
-J1["Formaliza e assina o Termo de Aditivo"]:::purple
-end
-
-D1 --> C1 --> C2 --> C3
-C3 -->|"Não"| D1
-C3 -->|"Sim"| J1 --> C4 --> C5
+J1 --> C1 --> C2
+C2 -->|"Valor / QQP"| C3 --> C5
+C2 -->|"Prazo"| C4 --> C5
+C2 -->|"Valor + Prazo"| C3 --> C4 --> C5
+C5 -->|"Sim"| C6 --> C7
+C5 -->|"Não"| C7
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
-          <span><i style="background:#73798c"></i>Gestor / Área Demandante</span>
           <span><i style="background:#6a4c93"></i>Jurídico / Suprimentos</span>
           <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
         </div>
+        <div class="note"><strong>Equalização:</strong> utilizar o modelo "Download Exemplo Planilha" para inserir novos itens de QQP. Após o carregamento no SIGEC, confirmar se o QQP existente foi atualizado ou se novo QQP foi criado pelo aditivo. A reclassificação atualiza automaticamente os requisitos de governança aplicáveis ao contrato.</div>
       </div>
     </section>
 
@@ -898,16 +918,16 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
     <!-- 10. RISCOS -->
     <section class="block" id="riscos">
       <div class="block-head"><span class="num">22</span><h2>Riscos Identificados</h2></div>
-      <p class="desc">Principais riscos contratuais, financeiros e de compliance mapeados nos documentos analisados.</p>
+      <p class="desc">Principais riscos financeiros, jurídicos e de compliance mapeados no ciclo de gestão contratual — focados em impacto e exposição, complementares aos desafios estruturais listados em Pontos Críticos.</p>
       <div class="grid-2">
-        <div class="mini-card risk"><span class="badge alta">Financeiro</span><h4>Pagamento sem evidência suficiente</h4><p>Aprovação de BM sem amostragem mínima de evidências pode gerar pagamento de serviço não efetivamente prestado.</p></div>
-        <div class="mini-card risk"><span class="badge alta">Jurídico</span><h4>Pleitos contratuais futuros</h4><p>Falta de evidências comprobatórias adequadas aumenta a exposição a pleitos e questionamentos da contratada.</p></div>
-        <div class="mini-card risk"><span class="badge media">Operacional</span><h4>Descumprimento do HCT contratado</h4><p>Mobilização de efetivo acima ou abaixo do Headcount de Terceiros aprovado no histograma do contrato.</p></div>
-        <div class="mini-card risk"><span class="badge alta">Sistêmico</span><h4>Contratos sem integração ao SIGEC</h4><p>Medições conduzidas fora do sistema (e-mail) aumentam o risco de pagamento indevido, duplicado ou sem controle de saldo.</p></div>
-        <div class="mini-card risk"><span class="badge media">Contratual</span><h4>Reajuste aplicado de forma não uniforme</h4><p>Itens do QQP reajustados de maneira divergente geram inconsistências de valor e dificultam a auditoria.</p></div>
-        <div class="mini-card risk"><span class="badge alta">Compliance</span><h4>Conflito de interesse na aprovação</h4><p>Usuário cadastrado como fornecedor que também aprova como fiscal compromete a segregação de funções.</p></div>
-        <div class="mini-card risk"><span class="badge media">Financeiro</span><h4>Fragilidade financeira da contratada</h4><p>Risco de continuidade da execução contratual em caso de instabilidade financeira do fornecedor.</p></div>
-        <div class="mini-card risk"><span class="badge media">Governança</span><h4>Penalidade aplicada sem formalização</h4><p>Notificações e multas aplicadas fora da escala formal (Conversa → Notificação → Multa → Distrato) ou sem registro adequado geram risco de invalidação da penalidade.</p></div>
+        <div class="mini-card risk"><span class="badge alta">Financeiro</span><h4>Pagamento de serviço não prestado</h4><p>Aprovação de BM sem amostragem mínima de evidências ou sem validação técnica do Fiscal pode gerar pagamento de serviço não efetivamente executado.</p></div>
+        <div class="mini-card risk"><span class="badge alta">Jurídico</span><h4>Pleitos contratuais futuros</h4><p>Ausência de evidências comprobatórias registradas no SIGEC aumenta a exposição a pleitos e questionamentos da contratada em litígio.</p></div>
+        <div class="mini-card risk"><span class="badge media">Contratual</span><h4>Reajuste aplicado de forma não uniforme</h4><p>Itens do QQP reajustados de maneira divergente geram inconsistências de valor, retroativos em apuração e dificultam a auditoria.</p></div>
+        <div class="mini-card risk"><span class="badge media">Financeiro</span><h4>Fragilidade financeira da contratada</h4><p>Risco de descontinuidade da execução em caso de instabilidade financeira do fornecedor, com impacto direto na entrega e no prazo contratual.</p></div>
+        <div class="mini-card risk"><span class="badge media">Governança</span><h4>Penalidade aplicada sem formalização</h4><p>Notificações ou multas aplicadas fora da escala formal (Conversa → Notificação → Multa → Distrato) ou sem registro no SIGEC geram risco de invalidação.</p></div>
+        <div class="mini-card risk"><span class="badge media">Operacional</span><h4>Descumprimento do HCT contratado</h4><p>Mobilização de efetivo acima ou abaixo do Headcount de Terceiros aprovado no histograma do contrato, sem formalização via TAC.</p></div>
+        <div class="mini-card risk"><span class="badge alta">Tributário</span><h4>GFC vencida ou retenção não realizada</h4><p>Garantia de Fiel Cumprimento vencida ou retenções não aplicadas resultam em exposição financeira à contratante e impedem o bloqueio preventivo em caso de inadimplência da contratada.</p></div>
+        <div class="mini-card risk"><span class="badge alta">Compliance</span><h4>Serviço fora do escopo sem TAC</h4><p>Execução de atividades não previstas no contrato original sem formalização via Termo de Aditivo Contratual expõe a empresa a pleitos de pagamento sem cobertura contratual.</p></div>
       </div>
     </section>
 
