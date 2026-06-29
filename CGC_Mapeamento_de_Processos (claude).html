@@ -159,10 +159,9 @@ footer.foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--border);
       <a href="#rc">Análise de RC</a>
       <a href="#cadastro">Cadastro Contratual</a>
       <a href="#mobilizacao">Mobilização e Kick-off</a>
-      <a href="#documental">Gestão Documental</a>
+      <a href="#documental">Gestão Documental e Bloqueio de NF (COA)</a>
       <a href="#medicoes">Medição e Aprovação de BM</a>
       <a href="#nota-fiscal">Emissão de Nota Fiscal</a>
-      <a href="#bloqueio-nf">Bloqueio de NF (COA)</a>
       <a href="#pagamento">Fluxo de Pagamento</a>
       <a href="#saldo">Gestão de Saldo</a>
       <a href="#vigencia">Gestão de Vigência</a>
@@ -399,43 +398,50 @@ CC5 -->|"Aprovado"| CC6 --> FF3 --> FF4 --> CC7
     </section>
 
     <section class="block" id="documental">
-      <div class="block-head"><span class="num">06</span><h2>Gestão Documental</h2></div>
-      <p class="desc">Validação qualitativa da documentação mensal (trabalhista, tributária e de segurança) — o COA (Conjunto de Obrigações Acessórias) é analisado pelo Analista de COA em até 72h úteis, com loop de pendências até a regularização antes da liberação do BM.</p>
+      <div class="block-head"><span class="num">06</span><h2>Gestão Documental e Bloqueio de NF (COA)</h2></div>
+      <p class="desc">Processo único de controle documental do COA (Conjunto de Obrigações Acessórias): da validação qualitativa da documentação mensal (trabalhista, tributária e de segurança) ao bloqueio e liberação das Notas Fiscais associadas. O COA é analisado pelo Analista de COA em até 72h úteis; enquanto houver pendência, a NF permanece bloqueada — com loop de regularização, atualização da planilha do Financeiro e comunicação formal aos Fiscais até a liberação do pagamento e do BM.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
 flowchart TB
 classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
+classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
 classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
 classDef gestor fill:#2f7a78,color:#fff,stroke:#1f5654;
 classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
 
-
-subgraph CG["Célula de Gestão de Contratos"]
-direction TB
-A1["Recebe notificação de pendências"]:::celula
-A2["Encaminha para providencias"]:::celula
-A3["Recebe documentação aprovada (COA)"]:::celula
-end
-
 subgraph CT["Contratada"]
 direction TB
-B1["Recebe pontos a corrigir / rever"]:::fornecedor
-B3["Envia documentos para análise qualitativa"]:::fornecedor
+B3["Envia documentação mensal (COA) para análise qualitativa"]:::fornecedor
+B1["Regulariza documentação pendente no COA"]:::fornecedor
 end
 
 subgraph VL["Analista de COA · RH · SSMA"]
+direction TB
 V1{"Documentos do COA em conformidade?<br/>(análise em até 72h úteis)"}:::decisao
 end
 
-B3 --> V1
-V1 -->|"Não"| A1--> A2--> B1 --> B3
-V1 -->|"Sim"| A3
+subgraph CG["Célula de Gestão de Contratos"]
+direction TB
+C0["Acessa planilha 'Notas Bloqueadas'<br/>e identifica contratos com pendência no COA"]:::celula
+A1["Recebe notificação de pendências<br/>e mantém NF bloqueada"]:::celula
+A2["Extrai relação de documentos pendentes<br/>e compila planilha consolidada"]:::celula
+A4["Atualiza planilha do Financeiro<br/>(acrescenta bloqueios · registra liberações)"]:::celula
+A5["Envia e-mail aos Fiscais com bloqueios,<br/>planilha atualizada e prints das NFs bloqueadas"]:::celula
+A3["Recebe documentação aprovada (COA)<br/>e libera NF para pagamento e BM"]:::celula
+A6["Verifica NFs adicionais no SIGEC<br/>(novas NFs além da lista)"]:::celula
+end
+
+C0 --> B3 --> V1
+V1 -->|"Não"| A1 --> A2 --> A4 --> A5 --> B1 --> B3
+V1 -->|"Sim"| A3 --> A6 --> V1
         </div></div>
         <div class="legend">
           <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
           <span><i style="background:#2f7a78"></i>Analista de COA / RH / SSMA</span>
           <span><i style="background:#f1602c"></i>Contratada</span>
+          <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
         </div>
+        <div class="note"><strong>Atenção:</strong> nos dias 15 e 16 de cada mês, a CGC identifica por área quais empresas não enviaram medições ou NFs e entra em contato com as áreas para registrar a situação. Para validar se uma NF pertence ao CGC, acessar o IFS e confirmar a área antes de qualquer movimentação. <strong>A ausência de qualquer documento do COA mantém a NF bloqueada e impede a liberação do BM até a regularização.</strong></div>
       </div>
     </section>
 
@@ -531,55 +537,8 @@ F2 -->|"Sim"| C3
       </div>
     </section>
 
-    <section class="block" id="bloqueio-nf">
-      <div class="block-head"><span class="num">09</span><h2>Bloqueio e Liberação de NF (COA)</h2></div>
-      <p class="desc">Verificação das Notas Fiscais bloqueadas por pendência documental no COA. A CGC confere a situação de cada contrato, mantém o bloqueio enquanto houver pendência e libera o pagamento após regularização — com comunicação formal aos Fiscais responsáveis.</p>
-      <div class="card">
-        <div class="diagram"><div class="mermaid">
-flowchart TB
-classDef celula fill:#13233f,color:#fff,stroke:#0c1830;
-classDef apoio fill:#73798c,color:#fff,stroke:#565b69;
-classDef fornecedor fill:#f1602c,color:#fff,stroke:#c94d22;
-classDef decisao fill:#ffe2b0,color:#5b3a00,stroke:#d99a2b;
-
-subgraph CG["Célula de Gestão de Contratos"]
-direction TB
-C1["Acessa planilha 'Notas Bloqueadas'<br/>e identifica contratos com pendência no COA"]:::celula
-C3["Extrai relação de documentos pendentes no COA<br/>e compila planilha consolidada"]:::celula
-C4["Atualiza planilha do Financeiro<br/>(acrescenta bloqueios · registra liberações)"]:::celula
-C5["Envia e-mail aos Fiscais com bloqueios,<br/>planilha do Fiscal atualizada e prints das NFs bloqueadas"]:::celula
-end
-
-subgraph FO["Contratada"]
-F1["Regulariza documentação pendente no COA"]:::fornecedor
-end
-
-subgraph VL["Analista de COA / Financeiro"]
-direction TB
-V1{"Pendência documental<br/>no COA para o período da NF?"}:::decisao
-V2["Libera NF para pagamento"]:::apoio
-V3["Mantém NF bloqueada"]:::apoio
-V4["Verifica NFs adicionais no SIGEC<br/>(novas NFs além da lista)"]:::apoio
-end
-
-C1 --> V1
-V1 -->|"Não"| V2
-V1 -->|"Sim"| V3 --> C3 --> C4 --> C5 --> F1 --> V1
-V2 --> V4
-V4 --> V1
-        </div></div>
-        <div class="legend">
-          <span><i style="background:#13233f"></i>Célula de Gestão de Contratos</span>
-          <span><i style="background:#73798c"></i>Analista de COA / Financeiro</span>
-          <span><i style="background:#f1602c"></i>Contratada</span>
-          <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
-        </div>
-        <div class="note"><strong>Atenção:</strong> nos dias 15 e 16 de cada mês, a CGC identifica por área quais empresas não enviaram medições ou NFs e entra em contato com as áreas para registrar a situação. Para validar se uma NF pertence ao CGC, acessar o IFS e confirmar a área antes de qualquer movimentação.</div>
-      </div>
-    </section>
-
     <section class="block" id="pagamento">
-      <div class="block-head"><span class="num">10</span><h2>Fluxo de Pagamento</h2></div>
+      <div class="block-head"><span class="num">09</span><h2>Fluxo de Pagamento</h2></div>
       <p class="desc">A CGC gera o BOOK do SIGEC (BM aprovado + NF) e encaminha ao Financeiro para programação dentro dos ciclos mensais (dias 05 e 20). O Financeiro lança a NF, levanta garantias e efetua o pagamento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -617,7 +576,7 @@ C1 --> C2 --> C3 --> F1 --> F2 --> F3 --> G1
     </section>
 
     <section class="block" id="saldo">
-      <div class="block-head"><span class="num">11</span><h2>Gestão de Saldo</h2></div>
+      <div class="block-head"><span class="num">10</span><h2>Gestão de Saldo</h2></div>
       <p class="desc">Controle do saldo contratual disponível a cada medição aprovada, com bloqueio de pagamento em caso de pendência no COA (matriz de documentos obrigatórios da contratada).</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -643,7 +602,7 @@ I -->|"Sim"| E
     </section>
 
     <section class="block" id="vigencia">
-      <div class="block-head"><span class="num">12</span><h2>Gestão de Vigência</h2></div>
+      <div class="block-head"><span class="num">11</span><h2>Gestão de Vigência</h2></div>
       <p class="desc">Monitoramento mensal da vigência contratual via Farol de Contratos, com alertas em 30, 60 e 90 dias antes do vencimento e direcionamento para aditivo ou encerramento.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -668,7 +627,7 @@ E -->|"Sem retorno da área"| H["Atualiza planilha como contrato encerrado"]:::c
     </section>
 
     <section class="block" id="aditivos">
-      <div class="block-head"><span class="num">13</span><h2>Aditivos</h2></div>
+      <div class="block-head"><span class="num">12</span><h2>Aditivos</h2></div>
       <p class="desc">Absorção do Termo de Aditivo Contratual (TAC) pela CGC: leitura e identificação do tipo de alteração (valor, prazo, QQP), equalização na planilha, atualização do SIGEC e reclassificação do contrato quando o aditivo altera o valor global.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -710,7 +669,7 @@ C5 -->|"Não"| C7
     </section>
 
     <section class="block" id="reajustes">
-      <div class="block-head"><span class="num">14</span><h2>Reajustes Contratuais</h2></div>
+      <div class="block-head"><span class="num">13</span><h2>Reajustes Contratuais</h2></div>
       <p class="desc">Aplicação de índices de reajuste previstos em contrato (ex.: INPC, IPCA, CCT). A CGC identifica a data-base, verifica o índice contratual, calcula o percentual e formaliza os novos valores via TAC — seguindo o mesmo fluxo de absorção de aditivo (equalização na planilha e atualização do QQP no SIGEC). Em caso de divergência na aplicação, o Gestor e o Jurídico são acionados antes da formalização.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -744,12 +703,12 @@ D -->|"Sim"| C5 --> C6 --> C7
           <span><i style="background:#6a4c93"></i>Gestor / Jurídico</span>
           <span><i style="background:#ffe2b0"></i>Ponto de decisão</span>
         </div>
-        <div class="note"><strong>Referência:</strong> após o alinhamento, o reajuste é absorvido como TAC (ver seção 13 — Aditivos). No SIGEC: atualizar o QQP existente com os novos valores ou inserir novo QQP se o aditivo criar itens adicionais. Registrar a data de competência do reajuste na planilha de medições para rastreabilidade em auditoria.</div>
+        <div class="note"><strong>Referência:</strong> após o alinhamento, o reajuste é absorvido como TAC (ver seção 12 — Aditivos). No SIGEC: atualizar o QQP existente com os novos valores ou inserir novo QQP se o aditivo criar itens adicionais. Registrar a data de competência do reajuste na planilha de medições para rastreabilidade em auditoria.</div>
       </div>
     </section>
 
     <section class="block" id="encerramento">
-      <div class="block-head"><span class="num">15</span><h2>Encerramento Contratual</h2></div>
+      <div class="block-head"><span class="num">14</span><h2>Encerramento Contratual</h2></div>
       <p class="desc">Desmobilização da contratada, verificação de pendências administrativas, emissão de NADA CONSTA e formalização do Termo de Encerramento Contratual (TEC) com o Jurídico.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -801,7 +760,7 @@ G1 --> C1 --> C2 --> C3 --> F1 --> F2 --> C4 --> G2 --> F3 --> C5 --> C6 --> J1 
     </section>
 
     <section class="block" id="penalidades">
-      <div class="block-head"><span class="num">16</span><h2>Notificação Contratual e Penalidades</h2></div>
+      <div class="block-head"><span class="num">15</span><h2>Notificação Contratual e Penalidades</h2></div>
       <p class="desc">Tratamento de desvios contratuais e não conformidades. A CGC apoia o Gestor no levantamento das informações previstas em contrato e, conforme solicitação, na emissão de Notificação Contratual com apoio do Jurídico, observando a escala formal de consequências: Conversa → Notificação → Multa → Distrato.</p>
       <div class="card">
         <div class="diagram"><div class="mermaid">
@@ -835,7 +794,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 5. GOVERNANÇA E CONTROLES -->
     <section class="block" id="classificacao">
-      <div class="block-head"><span class="num">17</span><h2>Classificação de Contratos</h2></div>
+      <div class="block-head"><span class="num">16</span><h2>Classificação de Contratos</h2></div>
       <p class="desc">Classificação dos contratos por criticidade, risco e complexidade, que define os níveis de governança e os requisitos de Kick-off e QEM aplicáveis.</p>
       <div class="grid-4" style="margin-bottom:16px;">
         <div class="mini-card cls"><span class="badge cls1">Classe I</span><h4>Estratégicos</h4><p>Maior nível de governança e acompanhamento. Kick-off e QEM obrigatórios.</p></div>
@@ -848,7 +807,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 6. MATRIZ RACI -->
     <section class="block" id="raci">
-      <div class="block-head"><span class="num">18</span><h2>Matriz RACI Resumida</h2></div>
+      <div class="block-head"><span class="num">17</span><h2>Matriz RACI Resumida</h2></div>
       <p class="desc">Distribuição de responsabilidades nas principais atividades do ciclo de vida contratual, com destaque para a segregação de funções entre Célula, Administrador, Gestor e Fiscal.</p>
       <div class="card" style="overflow-x:auto;">
         <table class="raci">
@@ -880,7 +839,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 7. PONTOS DE CONTROLE SOX -->
     <section class="block" id="controles">
-      <div class="block-head"><span class="num">19</span><h2>Pontos de Controle (SOX)</h2></div>
+      <div class="block-head"><span class="num">18</span><h2>Pontos de Controle (SOX)</h2></div>
       <p class="desc">Controles-chave do processo de gestão contratual, com o objetivo de controle e o risco mitigado em cada um — base para os testes de desenho e efetividade em auditoria.</p>
       <div class="grid-2">
         <div class="mini-card ctrl"><span class="badge sox">Segregação de funções</span><h4>Sequência obrigatória e não invertível de aprovação do BM</h4><p>Preposto → Fiscal → Gestor → Analista (CGC), sem inversão ou supressão de fases. Mitiga aprovação indevida e pagamento sem validação técnica e gerencial.</p></div>
@@ -896,7 +855,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 8. PONTOS CRÍTICOS -->
     <section class="block" id="criticos">
-      <div class="block-head"><span class="num">20</span><h2>Pontos Críticos do Processo</h2></div>
+      <div class="block-head"><span class="num">19</span><h2>Pontos Críticos do Processo</h2></div>
       <p class="desc">Desafios estruturais e operacionais identificados no panorama atual da Célula.</p>
       <div class="grid-2">
         <div class="mini-card point"><span class="badge estrutural">Capacidade</span><h4>Redução de capacidade técnica experiente</h4><p>O setor opera com capacidade técnica reduzida temporariamente frente a um elevado volume financeiro sob gestão (~R$ 30 Mi/mês medidos, 210 contratos ativos).</p></div>
@@ -912,7 +871,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 9. INDICADORES -->
     <section class="block" id="indicadores">
-      <div class="block-head"><span class="num">21</span><h2>Indicadores Recomendados</h2></div>
+      <div class="block-head"><span class="num">20</span><h2>Indicadores Recomendados</h2></div>
       <p class="desc">Indicadores operacionais e de compliance já em uso ou recomendados para o acompanhamento da gestão contratual.</p>
       <div class="grid-3">
         <div class="mini-card kpi"><h4>SLA de Análise de RC</h4><p>Até 5 dias úteis a partir do recebimento da requisição completa.</p></div>
@@ -929,7 +888,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 10. RISCOS -->
     <section class="block" id="riscos">
-      <div class="block-head"><span class="num">22</span><h2>Riscos Identificados</h2></div>
+      <div class="block-head"><span class="num">21</span><h2>Riscos Identificados</h2></div>
       <p class="desc">Principais riscos financeiros, jurídicos e de compliance mapeados no ciclo de gestão contratual — focados em impacto e exposição, complementares aos desafios estruturais listados em Pontos Críticos.</p>
       <div class="grid-2">
         <div class="mini-card risk"><span class="badge alta">Financeiro</span><h4>Pagamento de serviço não prestado</h4><p>Aprovação de BM sem amostragem mínima de evidências ou sem validação técnica do Fiscal pode gerar pagamento de serviço não efetivamente executado.</p></div>
@@ -945,7 +904,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 11. OPORTUNIDADES -->
     <section class="block" id="oportunidades">
-      <div class="block-head"><span class="num">23</span><h2>Oportunidades de Melhoria</h2></div>
+      <div class="block-head"><span class="num">22</span><h2>Oportunidades de Melhoria</h2></div>
       <p class="desc">Direcionamentos e próximos passos apontados para fortalecer a governança e a eficiência da gestão contratual.</p>
       <div class="grid-2">
         <div class="mini-card op"><h4>Participação obrigatória da CGC na contratação</h4><p>Formalizar critérios de medição, evidências e modelo de controle antes do início da execução contratual.</p></div>
@@ -963,7 +922,7 @@ J -->|"Sim"| K["4 · Distrato / encerramento contratual"]:::celula
 
     <!-- 12. GLOSSÁRIO -->
     <section class="block" id="glossario">
-      <div class="block-head"><span class="num">24</span><h2>Glossário</h2></div>
+      <div class="block-head"><span class="num">23</span><h2>Glossário</h2></div>
       <p class="desc">Termos e siglas utilizados no processo de gestão contratual.</p>
       <div class="card" style="overflow-x:auto;">
         <table class="gloss">
